@@ -29,7 +29,7 @@ spec:
               threads_per_process=50 
               process_per_host=8 
               batch_size=100
-              num_clients=3
+              num_clients=1
               field_count=10
               field_length=100
               max_execution_time_seconds=300
@@ -72,7 +72,6 @@ spec:
                 -p updateproportion=0.0 \
                 -p requestdistribution=uniform 2>&1 | tee $log_file"
               sh -c "$ycsb_load_cmd"
-              sleep 20
               sh -c "$ycsb_run_cmd"
               while true; do
                 echo "Waiting for load to finish"
