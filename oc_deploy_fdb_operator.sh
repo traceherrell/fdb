@@ -11,7 +11,7 @@ oc apply -f https://raw.githubusercontent.com/FoundationDB/fdb-kubernetes-operat
 #deployment
 oc apply -f https://raw.githubusercontent.com/foundationdb/fdb-kubernetes-operator/main/config/samples/deployment.yaml
 
-# #create sample cluster fdb-cluster
+# #create  fdb-cluster
 oc apply -f fdb_cluster.yaml
 
 
