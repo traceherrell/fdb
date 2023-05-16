@@ -20,8 +20,8 @@ spec:
             - |
               host_index=$(echo $HOSTNAME | grep -o '[0-9]\+')
               cd ycsb-foundationdb-binding-0.18.0-SNAPSHOT
-              run_id='fdb_run_001'
-              log_file='$run_id_host_$host_index.log'
+              now=$(date +"%Y_%m_%d_%H_%M_%S")
+              log_file="ycsb_host_${host_index}__$now.log"
               db_name='fdb' 
               workload='workloads/workloada'
               num_keys=10000 
@@ -56,7 +56,7 @@ spec:
                 -p fieldlength=$field_length \
                 -p readproportion=1.0 \
                 -p updateproportion=0.0 \
-                -p requestdistribution=uniform 2>&1 | tee $log_file"
+                -p requestdistribution=uniform 2>&1 | tee -a $log_file"
 
               ycsb_run_cmd="./bin/ycsb run foundationdb -s \
                 -P $workload \
@@ -70,7 +70,7 @@ spec:
                 -p fieldlength=$field_length \
                 -p readproportion=1.0 \
                 -p updateproportion=0.0 \
-                -p requestdistribution=uniform 2>&1 | tee $log_file"
+                -p requestdistribution=uniform 2>&1 | tee -a $log_file"
               sh -c "$ycsb_load_cmd"
               sh -c "$ycsb_run_cmd"
               while true; do
