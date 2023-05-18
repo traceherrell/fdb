@@ -151,10 +151,10 @@ def parse_log(log):
                         exit(1)
 
 
-def get_statefulset_pods():
+def get_statefulset_pods(name):
     pods = (
         subprocess.check_output(
-            ["oc", "get", "pods", "--selector", "app=ycsb", "-o", "name"]
+            ["oc", "get", "pods", "--selector", "app=$name", "-o", "name"]
         )
         .decode("utf-8")
         .strip()
@@ -171,7 +171,6 @@ def get_pod_logs(namespace, name):
 
 def aggregate_statefulset_logs(namespace, name):
     pods = get_statefulset_pods()
-
     log_file = "statefulset-logs.txt"
 
     if os.path.exists(log_file):
